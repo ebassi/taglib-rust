@@ -14,8 +14,8 @@ fn build_pkgconfig() -> bool {
 
 #[cfg(feature="pkg-config")]
 fn build_pkgconfig() -> bool {
-    if pkg_config::find_library("tag_c").is_err() {
-        panic!("Could not find tag_c via pkgconfig");
+    if pkg_config::find_library("taglib_c").is_err() {
+        panic!("Could not find taglib_c via pkgconfig");
     }
     true
 }
