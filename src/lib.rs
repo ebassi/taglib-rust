@@ -4,7 +4,6 @@ extern crate libc;
 
 use libc::{c_char};
 use std::ffi::{CString, CStr};
-use std::ptr;
 
 pub mod taglib_sys;
 
