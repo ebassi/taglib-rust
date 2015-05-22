@@ -1,4 +1,4 @@
-## TagLib-Rust
+## TagLib-Rust  [![Build Status][trav-ci-img]][trav-ci]
 
 Simple bindings for TagLib in Rust
 
