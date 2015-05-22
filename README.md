@@ -64,15 +64,14 @@ The API reference for TagLib-Rust is available [online][taglib-docs].
 
 ## License
 
-TagLib-Rust is licensed under the terms of the Lesser General Public
-License version 2.1, or, at your option under the terms of the Mozilla
-Public License version 1.1.
+TagLib-Rust is licensed under the terms of the [MIT/X11 license][osi-mit].
 
- * LGPL v2.1: http://www.gnu.org/licenses/
- * MPL 1.1: https://www.mozilla.org/MPL/1.1/index.txt
+See the `LICENSE` file for more details.
+
 
 [trav-ci-img]: https://travis-ci.org/ebassi/taglib-rust.png?branch=master
 [trav-ci]: https://travis-ci.org/ebassi/taglib-rust
 [crates]: http://crates.io/
 [taglib-gh]: https://github.com/ebassi/taglib-rust
 [taglib-docs]: http://ebassi.github.io/taglib-rust/docs/taglib/
+[osi-mit]: http://opensource.org/licenses/MIT
