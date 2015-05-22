@@ -1,7 +1,7 @@
 [package]
 name = "taglib"
 description = "Rust bindings for TagLib"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Emmanuele Bassi <ebassi@gnome.org>"]
 license = "LGPL-2.1"
 repository = "https://github.com/ebassi/taglib-rust"
