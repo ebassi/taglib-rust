@@ -36,9 +36,19 @@ impl Tag {
     c_str_to_str(res)
   }
 
+  pub fn set_title(&mut self, title: &str) {
+    let s = CString::new(title).unwrap().as_ptr();
+    unsafe { ll::taglib_tag_set_title(self.raw, s); }
+  }
+
   pub fn artist(&self) -> String {
     let res = unsafe { ll::taglib_tag_artist(self.raw) };
     c_str_to_str(res)
+  }
+
+  pub fn set_artist(&mut self, artist: &str) {
+    let s = CString::new(artist).unwrap().as_ptr();
+    unsafe { ll::taglib_tag_set_artist(self.raw, s); }
   }
 
   pub fn album(&self) -> String {
@@ -46,9 +56,19 @@ impl Tag {
     c_str_to_str(res)
   }
 
+  pub fn set_album(&mut self, album: &str) {
+    let s = CString::new(album).unwrap().as_ptr();
+    unsafe { ll::taglib_tag_set_album(self.raw, s); }
+  }
+
   pub fn comment(&self) -> String {
     let res = unsafe { ll::taglib_tag_comment(self.raw) };
     c_str_to_str(res)
+  }
+
+  pub fn set_comment(&mut self, comment: &str) {
+    let s = CString::new(comment).unwrap().as_ptr();
+    unsafe { ll::taglib_tag_set_comment(self.raw, s); }
   }
 
   pub fn genre(&self) -> String {
@@ -56,12 +76,25 @@ impl Tag {
     c_str_to_str(res)
   }
 
-  pub fn year(&self) -> i32 {
-    unsafe { ll::taglib_tag_year(self.raw) as i32 }
+  pub fn set_genre(&mut self, genre: &str) {
+    let s = CString::new(genre).unwrap().as_ptr();
+    unsafe { ll::taglib_tag_set_genre(self.raw, s); }
   }
 
-  pub fn track(&self) -> i32 {
-    unsafe { ll::taglib_tag_track(self.raw) as i32 }
+  pub fn year(&self) -> u32 {
+    unsafe { ll::taglib_tag_year(self.raw) as u32 }
+  }
+
+  pub fn set_year(&mut self, year: u32) {
+    unsafe { ll::taglib_tag_set_year(self.raw, year); }
+  }
+
+  pub fn track(&self) -> u32 {
+    unsafe { ll::taglib_tag_track(self.raw) as u32 }
+  }
+
+  pub fn set_track(&mut self, track: u32) {
+    unsafe { ll::taglib_tag_set_track(self.raw, track); }
   }
 }
 
