@@ -53,7 +53,8 @@ Otherwise, clone [the Git repository][taglib-gh], and run [cargo][crates]:
 
 ### Examples
 
-
+TagLib-Rust comes with some examples on how to use it, see the `examples`
+directory in the [the Git repository][taglib-gh].
 
 ## License
 
