@@ -193,6 +193,10 @@ impl File {
       Ok(AudioProperties { raw: res })
     }
   }
+
+  pub fn save(&self) -> bool {
+    unsafe { ll::taglib_file_save(self.raw) != 0 }
+  }
 }
 
 pub fn set_strings_unicode(value: bool) {
