@@ -1,1 +1,13 @@
 language: rust
+
+rust:
+    - stable
+
+install:
+    - sudo apt-get install libtaglib-dev
+
+script:
+    - cargo build -v
+    - cargo build -v --features "use-pkg-config"
+    - cargo test -v
+    - cargo doc -v
