@@ -49,12 +49,18 @@ Alternatively, you can pull it from [GitHub][taglib-gh]:
 
 Otherwise, clone [the Git repository][taglib-gh], and run [cargo][crates]:
 
+```
     $ cargo build
+```
 
 ### Examples
 
 TagLib-Rust comes with some examples on how to use it, see the `examples`
 directory in the [the Git repository][taglib-gh].
+
+### Documentation
+
+The API reference for TagLib-Rust is available [online][taglib-docs].
 
 ## License
 
@@ -69,3 +75,4 @@ Public License version 1.1.
 [trav-ci]: https://travis-ci.org/ebassi/taglib-rust
 [crates]: http://crates.io/
 [taglib-gh]: https://github.com/ebassi/taglib-rust
+[taglib-docs]: http://ebassi.github.io/taglib-rust/docs/taglib/
