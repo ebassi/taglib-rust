@@ -4,7 +4,7 @@ rust:
     - stable
 
 install:
-    - sudo apt-get install libtaglib-dev
+    - sudo apt-get install libtag1-dev libtagc0-dev
 
 script:
     - cargo build -v
