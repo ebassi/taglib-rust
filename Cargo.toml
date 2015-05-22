@@ -1,0 +1,26 @@
+[package]
+name = "taglib"
+description = "Rust bindings for TagLib"
+version = "0.1.0"
+authors = ["Emmanuele Bassi <ebassi@gnome.org>"]
+license = "LGPL-2.1"
+repository = "https://github.com/ebassi/taglib-rust"
+keywords = ["taglib", "media", "tags", "metadata"]
+homepage = "https://github.com/ebassi/taglib-rust"
+links = "tag_c"
+build = "build.rs"
+
+[lib]
+name = "taglib"
+path = "src/lib.rs"
+
+[dependencies]
+libc = "0.1"
+
+[build-dependencies.pkg-config]
+version = "0.3"
+optional = true
+
+[features]
+default = []
+use-pkgconfig = ["pkg-config"]
