@@ -1,0 +1,23 @@
+[package]
+name = "taglib-sys"
+description = "Raw TagLib bindings for Rust, used internally by TagLib-Rust"
+version = "0.2.0"
+authors = ["Emmanuele Bassi <ebassi@gnome.org>"]
+repository = "https://github.com/ebassi/taglib-rust"
+links = "tag_c"
+build = "build.rs"
+
+[lib]
+name = "taglib_sys"
+path = "src/lib.rs"
+
+[dependencies]
+libc = "0.1"
+
+[build-dependencies.pkg-config]
+version = "0.3"
+optional = true
+
+[features]
+default = []
+use-pkgconfig = ["pkg-config"]

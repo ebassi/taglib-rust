@@ -1,3 +1,6 @@
+#![allow(non_camel_case_types)]
+extern crate libc;
+
 use libc::{c_int, c_uint, c_char, c_void};
 
 // Public types; these are all opaque pointer types

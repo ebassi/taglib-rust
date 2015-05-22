@@ -8,8 +8,6 @@ repository = "https://github.com/ebassi/taglib-rust/"
 keywords = ["taglib", "media", "tags", "metadata"]
 homepage = "http://ebassi.github.io/taglib-rust/"
 documentation = "http://ebassi.github.io/taglib-rust/docs/taglib/"
-links = "tag_c"
-build = "build.rs"
 
 [lib]
 name = "taglib"
@@ -18,10 +16,14 @@ path = "src/lib.rs"
 [dependencies]
 libc = "0.1"
 
+[dependencies.taglib-sys]
+path = "taglib-sys"
+version = "0.2.0"
+
 [build-dependencies.pkg-config]
 version = "0.3"
 optional = true
 
 [features]
 default = []
-use-pkgconfig = ["pkg-config"]
+use-pkgconfig = ["taglib-sys/use-pkgconfig"]

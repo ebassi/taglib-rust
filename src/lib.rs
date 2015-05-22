@@ -1,13 +1,13 @@
-#![allow(non_camel_case_types)]
+#![crate_name = "taglib"]
+#![crate_type = "lib"]
 
 extern crate libc;
+extern crate taglib_sys as sys;
 
 use libc::{c_char};
 use std::ffi::{CString, CStr};
 
-pub mod taglib_sys;
-
-use taglib_sys as ll;
+use sys as ll;
 
 fn c_str_to_str(c_str: *const c_char) -> String {
   if c_str.is_null() {
