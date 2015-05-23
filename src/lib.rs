@@ -233,6 +233,22 @@ impl File {
     Ok(File { raw: f })
   }
 
+  /// Creates a new `taglib::File` for the given `filename` and type of file.
+  pub fn new_type(filename: &str, filetype: FileType) -> Result<File, FileError> {
+    let filename_c =
+      match CString::new(filename) {
+        Ok(s) => s.as_ptr(),
+        _ => return Err(FileError::InvalidFileName)
+      };
+
+    let f = unsafe { ll::taglib_file_new_type(filename_c, filetype as u32) };
+    if f.is_null() {
+      return Err(FileError::InvalidFile);
+    }
+
+    Ok(File { raw: f })
+  }
+
   /// Returns the `taglib::Tag` instance for the given file.
   pub fn tag(&self) -> Result<Tag, FileError> {
     let res = unsafe { ll::taglib_file_tag(self.raw) };
