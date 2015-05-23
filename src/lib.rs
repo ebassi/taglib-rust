@@ -267,8 +267,3 @@ impl File {
     unsafe { ll::taglib_file_save(self.raw) != 0 }
   }
 }
-
-/// Enables or disables the Unicode string management.
-pub fn set_strings_unicode(value: bool) {
-  unsafe { ll::taglib_set_strings_unicode(value as ll::TagLib_Bool); }
-}

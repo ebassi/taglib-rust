@@ -44,8 +44,6 @@ pub const TAGLIB_FILE_ASF: TagLib_FileType = 9;
 
 // tag_c.h
 extern "C" {
-  pub fn taglib_set_strings_unicode(value: TagLib_Bool);
-
   pub fn taglib_file_new(filename: *const c_char) -> *mut TagLib_File;
   pub fn taglib_file_new_type(filename: *const c_char, filetype: TagLib_FileType) -> *mut TagLib_File;
   pub fn taglib_file_is_valid(file: *mut TagLib_File) -> TagLib_Bool;

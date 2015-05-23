@@ -3,8 +3,6 @@ extern crate taglib;
 use std::env;
 
 pub fn main() {
-  taglib::set_strings_unicode(false);
-
   let args: Vec<String> = env::args().collect();
 
   for arg in &args {
