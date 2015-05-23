@@ -5,7 +5,8 @@ use std::env;
 pub fn main() {
   let args: Vec<String> = env::args().collect();
 
-  for arg in &args {
+  for i in 1..args.len() {
+    let ref arg = args[i];
     let file =
       match taglib::File::new(arg) {
         Ok(f) => f,
