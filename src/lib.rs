@@ -39,21 +39,32 @@ fn c_str_to_str(c_str: *const c_char) -> String {
   }
 }
 
+/// A representation of an audio file, with meta-data and properties.
+pub struct File {
+  raw: *mut ll::TagLib_File,
+}
+
 /// The abstract meta-data container for audio files
 ///
 /// Each `Tag` instance can only be created by the `taglib::File::tag()`
 /// method.
-pub struct Tag {
+#[allow(dead_code)]
+pub struct Tag<'a> {
   raw: *mut ll::TagLib_Tag,
+  file: &'a File,
 }
 
-impl Drop for Tag {
-  fn drop(&mut self) {
-    unsafe { ll::taglib_tag_free_strings() }
-  }
+/// Common audio file properties.
+///
+/// Instances of `AudioProperties` can only be created through the
+/// `taglib::File::audioproperties()` method.
+#[allow(dead_code)]
+pub struct AudioProperties<'a> {
+  raw: *const ll::TagLib_AudioProperties,
+  file: &'a File,
 }
 
-impl Tag {
+impl<'a> Tag<'a> {
   /// Returns the track name, or an empty string if no track name is present.
   pub fn title(&self) -> String {
     let res = unsafe { ll::taglib_tag_title(self.raw) };
@@ -136,15 +147,7 @@ impl Tag {
   }
 }
 
-/// Common audio file properties.
-///
-/// Instances of `AudioProperties` can only be created through the
-/// `taglib::File::audioproperties()` method.
-pub struct AudioProperties {
-  raw: *const ll::TagLib_AudioProperties,
-}
-
-impl AudioProperties {
+impl<'a> AudioProperties<'a> {
   /// Returns the length, in seconds, of the track.
   pub fn length(&self) -> u32 {
     unsafe { ll::taglib_audioproperties_length(self.raw) as u32 }
@@ -205,11 +208,6 @@ pub enum FileError {
   NoAvailableAudioProperties
 }
 
-/// A representation of an audio file, with meta-data and properties.
-pub struct File {
-  raw: *mut ll::TagLib_File,
-}
-
 impl Drop for File {
   fn drop(&mut self) {
     unsafe { ll::taglib_file_free(self.raw); }
@@ -257,7 +255,7 @@ impl File {
       Err(FileError::NoAvailableTag)
     }
     else {
-      Ok(Tag { raw: res })
+      Ok(Tag { raw: res, file: self })
     }
   }
 
@@ -274,7 +272,7 @@ impl File {
       Err(FileError::NoAvailableAudioProperties)
     }
     else {
-      Ok(AudioProperties { raw: res })
+      Ok(AudioProperties { raw: res, file: self })
     }
   }
 
