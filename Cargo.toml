@@ -20,10 +20,6 @@ libc = "0.1"
 path = "taglib-sys"
 version = "0.2.0"
 
-[build-dependencies.pkg-config]
-version = "0.3"
-optional = true
-
 [features]
 default = []
 use-pkgconfig = ["taglib-sys/use-pkgconfig"]
