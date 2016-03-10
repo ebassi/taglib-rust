@@ -9,6 +9,7 @@
 
     <title>taglib::Tag - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -24,97 +25,111 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>taglib</a></p><script>window.sidebarCurrent = {name: 'Tag', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>taglib</a>::<wbr><a class='struct' href=''>Tag</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-41' href='../src/taglib/lib.rs.html#26-28'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct Tag {
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>taglib</a>::<wbr><a class='struct' href=''>Tag</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-14' class='srclink' href='../src/taglib/lib.rs.html#52-55' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Tag&lt;'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>The abstract meta-data container for audio files</p>
 
 <p>Each <code>Tag</code> instance can only be created by the <code>taglib::File::tag()</code>
 method.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../taglib/struct.Tag.html' title='taglib::Tag'>Tag</a></code></h3><div class='impl-items'><h4 id='method.title' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.title' class='fnname'>title</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../taglib/struct.Tag.html' title='taglib::Tag'>Tag</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.title' class='method'><code>fn <a href='#method.title' class='fnname'>title</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <div class='docblock'><p>Returns the track name, or an empty string if no track name is present.</p>
-</div><h4 id='method.set_title' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_title' class='fnname'>set_title</a>(&amp;mut self, title: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+</div><h4 id='method.set_title' class='method'><code>fn <a href='#method.set_title' class='fnname'>set_title</a>(&amp;mut self, title: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
 <div class='docblock'><p>Sets the track name.</p>
-</div><h4 id='method.artist' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.artist' class='fnname'>artist</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
+</div><h4 id='method.artist' class='method'><code>fn <a href='#method.artist' class='fnname'>artist</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <div class='docblock'><p>Returns the artist name, or an empty string if no artist name is present.</p>
-</div><h4 id='method.set_artist' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_artist' class='fnname'>set_artist</a>(&amp;mut self, artist: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+</div><h4 id='method.set_artist' class='method'><code>fn <a href='#method.set_artist' class='fnname'>set_artist</a>(&amp;mut self, artist: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
 <div class='docblock'><p>Sets the artist name.</p>
-</div><h4 id='method.album' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.album' class='fnname'>album</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
+</div><h4 id='method.album' class='method'><code>fn <a href='#method.album' class='fnname'>album</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <div class='docblock'><p>Returns the album name, or an empty string if no album name is present.</p>
-</div><h4 id='method.set_album' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_album' class='fnname'>set_album</a>(&amp;mut self, album: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+</div><h4 id='method.set_album' class='method'><code>fn <a href='#method.set_album' class='fnname'>set_album</a>(&amp;mut self, album: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
 <div class='docblock'><p>Sets the album name.</p>
-</div><h4 id='method.comment' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.comment' class='fnname'>comment</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
+</div><h4 id='method.comment' class='method'><code>fn <a href='#method.comment' class='fnname'>comment</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <div class='docblock'><p>Returns the track comment, or an empty string if no track comment is
 present.</p>
-</div><h4 id='method.set_comment' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_comment' class='fnname'>set_comment</a>(&amp;mut self, comment: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+</div><h4 id='method.set_comment' class='method'><code>fn <a href='#method.set_comment' class='fnname'>set_comment</a>(&amp;mut self, comment: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
 <div class='docblock'><p>Sets the track comment.</p>
-</div><h4 id='method.genre' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.genre' class='fnname'>genre</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
+</div><h4 id='method.genre' class='method'><code>fn <a href='#method.genre' class='fnname'>genre</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <div class='docblock'><p>Returns the genre name, or an empty string if no genre name is present.</p>
-</div><h4 id='method.set_genre' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_genre' class='fnname'>set_genre</a>(&amp;mut self, genre: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+</div><h4 id='method.set_genre' class='method'><code>fn <a href='#method.set_genre' class='fnname'>set_genre</a>(&amp;mut self, genre: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
 <div class='docblock'><p>Sets the genre name.</p>
-</div><h4 id='method.year' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.year' class='fnname'>year</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+</div><h4 id='method.year' class='method'><code>fn <a href='#method.year' class='fnname'>year</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
 <div class='docblock'><p>Returns the year, or 0 if no year is present.</p>
-</div><h4 id='method.set_year' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_year' class='fnname'>set_year</a>(&amp;mut self, year: <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
+</div><h4 id='method.set_year' class='method'><code>fn <a href='#method.set_year' class='fnname'>set_year</a>(&amp;mut self, year: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
 <div class='docblock'><p>Sets the year.</p>
-</div><h4 id='method.track' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.track' class='fnname'>track</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
+</div><h4 id='method.track' class='method'><code>fn <a href='#method.track' class='fnname'>track</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
 <div class='docblock'><p>Returns the track number, or 0 if no track number is present.</p>
-</div><h4 id='method.set_track' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_track' class='fnname'>set_track</a>(&amp;mut self, track: <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
+</div><h4 id='method.set_track' class='method'><code>fn <a href='#method.set_track' class='fnname'>set_track</a>(&amp;mut self, track: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
 <div class='docblock'><p>Sets the track number.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../taglib/struct.Tag.html' title='taglib::Tag'>Tag</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-</div></section>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 
@@ -126,6 +141,6 @@ present.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

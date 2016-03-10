@@ -9,6 +9,7 @@
 
     <title>taglib::FileType - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -24,26 +25,28 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>taglib</a></p><script>window.sidebarCurrent = {name: 'FileType', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
     </nav>
 
     <section id='main' class="content enum">
-<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>taglib</a>::<wbr><a class='enum' href=''>FileType</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-420' href='../src/taglib/lib.rs.html#153-174'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>taglib</a>::<wbr><a class='enum' href=''>FileType</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-79' class='srclink' href='../src/taglib/lib.rs.html#176-197' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum FileType {
     MPEG,
     OggVorbis,
@@ -56,55 +59,68 @@
     MP4,
     ASF,
 }</pre><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.MPEG'><a class='stability Unmarked' title='No stability level'></a><code>MPEG</code></td><td><div class='docblock'><p>MPEG file</p>
-</div></td></tr><tr><td id='variant.OggVorbis'><a class='stability Unmarked' title='No stability level'></a><code>OggVorbis</code></td><td><div class='docblock'><p>Ogg/Vorbis file</p>
-</div></td></tr><tr><td id='variant.FLAC'><a class='stability Unmarked' title='No stability level'></a><code>FLAC</code></td><td><div class='docblock'><p>FLAC file</p>
-</div></td></tr><tr><td id='variant.MPC'><a class='stability Unmarked' title='No stability level'></a><code>MPC</code></td><td><div class='docblock'><p>MPC file</p>
-</div></td></tr><tr><td id='variant.OggFlac'><a class='stability Unmarked' title='No stability level'></a><code>OggFlac</code></td><td><div class='docblock'><p>Ogg/FLAC file</p>
-</div></td></tr><tr><td id='variant.WavPack'><a class='stability Unmarked' title='No stability level'></a><code>WavPack</code></td><td><div class='docblock'><p>WavPack file</p>
-</div></td></tr><tr><td id='variant.Speex'><a class='stability Unmarked' title='No stability level'></a><code>Speex</code></td><td><div class='docblock'><p>Ogg/Speex file</p>
-</div></td></tr><tr><td id='variant.TrueAudio'><a class='stability Unmarked' title='No stability level'></a><code>TrueAudio</code></td><td><div class='docblock'><p>TrueAudio file</p>
-</div></td></tr><tr><td id='variant.MP4'><a class='stability Unmarked' title='No stability level'></a><code>MP4</code></td><td><div class='docblock'><p>MP4 file</p>
-</div></td></tr><tr><td id='variant.ASF'><a class='stability Unmarked' title='No stability level'></a><code>ASF</code></td><td><div class='docblock'><p>ASF file</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a></code></h4>
-<h4 id='method.clone_from' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a></code></h3><div class='impl-items'></div></section>
+<table><tr><td id='variant.MPEG'><code>MPEG</code></td><td><div class='docblock'><p>MPEG file</p>
+</div></td></tr><tr><td id='variant.OggVorbis'><code>OggVorbis</code></td><td><div class='docblock'><p>Ogg/Vorbis file</p>
+</div></td></tr><tr><td id='variant.FLAC'><code>FLAC</code></td><td><div class='docblock'><p>FLAC file</p>
+</div></td></tr><tr><td id='variant.MPC'><code>MPC</code></td><td><div class='docblock'><p>MPC file</p>
+</div></td></tr><tr><td id='variant.OggFlac'><code>OggFlac</code></td><td><div class='docblock'><p>Ogg/FLAC file</p>
+</div></td></tr><tr><td id='variant.WavPack'><code>WavPack</code></td><td><div class='docblock'><p>WavPack file</p>
+</div></td></tr><tr><td id='variant.Speex'><code>Speex</code></td><td><div class='docblock'><p>Ogg/Speex file</p>
+</div></td></tr><tr><td id='variant.TrueAudio'><code>TrueAudio</code></td><td><div class='docblock'><p>TrueAudio file</p>
+</div></td></tr><tr><td id='variant.MP4'><code>MP4</code></td><td><div class='docblock'><p>MP4 file</p>
+</div></td></tr><tr><td id='variant.ASF'><code>ASF</code></td><td><div class='docblock'><p>ASF file</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../taglib/enum.FileType.html' title='taglib::FileType'>FileType</a></code></h3><div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 
@@ -116,6 +132,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>
