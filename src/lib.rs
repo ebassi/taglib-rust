@@ -219,11 +219,11 @@ impl File {
   pub fn new(filename: &str) -> Result<File, FileError> {
     let filename_c =
       match CString::new(filename) {
-        Ok(s) => s.as_ptr(),
+        Ok(s) => s,
         _ => return Err(FileError::InvalidFileName)
       };
 
-    let f = unsafe { ll::taglib_file_new(filename_c) };
+    let f = unsafe { ll::taglib_file_new(filename_c.as_ptr()) };
     if f.is_null() {
       return Err(FileError::InvalidFile);
     }
@@ -235,11 +235,11 @@ impl File {
   pub fn new_type(filename: &str, filetype: FileType) -> Result<File, FileError> {
     let filename_c =
       match CString::new(filename) {
-        Ok(s) => s.as_ptr(),
+        Ok(s) => s,
         _ => return Err(FileError::InvalidFileName)
       };
 
-    let f = unsafe { ll::taglib_file_new_type(filename_c, filetype as u32) };
+    let f = unsafe { ll::taglib_file_new_type(filename_c.as_ptr(), filetype as u32) };
     if f.is_null() {
       return Err(FileError::InvalidFile);
     }
