@@ -73,7 +73,8 @@ impl<'a> Tag<'a> {
 
   /// Sets the track name.
   pub fn set_title(&mut self, title: &str) {
-    let s = CString::new(title).unwrap().as_ptr();
+    let cs = CString::new(title).unwrap();
+    let s = cs.as_ptr();
     unsafe { ll::taglib_tag_set_title(self.raw, s); }
   }
 
@@ -85,7 +86,8 @@ impl<'a> Tag<'a> {
 
   /// Sets the artist name.
   pub fn set_artist(&mut self, artist: &str) {
-    let s = CString::new(artist).unwrap().as_ptr();
+    let cs = CString::new(artist).unwrap();
+    let s = cs.as_ptr();
     unsafe { ll::taglib_tag_set_artist(self.raw, s); }
   }
 
@@ -97,7 +99,8 @@ impl<'a> Tag<'a> {
 
   /// Sets the album name.
   pub fn set_album(&mut self, album: &str) {
-    let s = CString::new(album).unwrap().as_ptr();
+    let cs = CString::new(album).unwrap();
+    let s = cs.as_ptr();
     unsafe { ll::taglib_tag_set_album(self.raw, s); }
   }
 
@@ -110,7 +113,8 @@ impl<'a> Tag<'a> {
 
   /// Sets the track comment.
   pub fn set_comment(&mut self, comment: &str) {
-    let s = CString::new(comment).unwrap().as_ptr();
+    let cs = CString::new(comment).unwrap();
+    let s = cs.as_ptr();
     unsafe { ll::taglib_tag_set_comment(self.raw, s); }
   }
 
@@ -122,7 +126,8 @@ impl<'a> Tag<'a> {
 
   /// Sets the genre name.
   pub fn set_genre(&mut self, genre: &str) {
-    let s = CString::new(genre).unwrap().as_ptr();
+    let cs = CString::new(genre).unwrap();
+    let s = cs.as_ptr();
     unsafe { ll::taglib_tag_set_genre(self.raw, s); }
   }
 
@@ -219,11 +224,13 @@ impl File {
   pub fn new(filename: &str) -> Result<File, FileError> {
     let filename_c =
       match CString::new(filename) {
-        Ok(s) => s.as_ptr(),
+        Ok(s) => s,
         _ => return Err(FileError::InvalidFileName)
       };
+      
+    let filename_c_ptr = filename_c.as_ptr();
 
-    let f = unsafe { ll::taglib_file_new(filename_c) };
+    let f = unsafe { ll::taglib_file_new(filename_c_ptr) };
     if f.is_null() {
       return Err(FileError::InvalidFile);
     }
@@ -235,11 +242,12 @@ impl File {
   pub fn new_type(filename: &str, filetype: FileType) -> Result<File, FileError> {
     let filename_c =
       match CString::new(filename) {
-        Ok(s) => s.as_ptr(),
+        Ok(s) => s,
         _ => return Err(FileError::InvalidFileName)
       };
 
-    let f = unsafe { ll::taglib_file_new_type(filename_c, filetype as u32) };
+    let filename_c_ptr = filename_c.as_ptr();
+    let f = unsafe { ll::taglib_file_new_type(filename_c_ptr, filetype as u32) };
     if f.is_null() {
       return Err(FileError::InvalidFile);
     }
