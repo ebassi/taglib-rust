@@ -26,6 +26,7 @@ extern crate taglib_sys as sys;
 
 use libc::{c_char};
 use std::ffi::{CString, CStr};
+use std::path::Path;
 
 use sys as ll;
 
@@ -227,7 +228,6 @@ impl File {
         Ok(s) => s,
         _ => return Err(FileError::InvalidFileName)
       };
-      
     let filename_c_ptr = filename_c.as_ptr();
 
     let f = unsafe { ll::taglib_file_new(filename_c_ptr) };
@@ -237,6 +237,26 @@ impl File {
 
     Ok(File { raw: f })
   }
+
+  /// Creates a new `taglib::File` for the given `path`.
+  pub fn from_path<P>(path: P) -> Result<File, FileError>
+    where P: AsRef<Path>,
+      std::vec::Vec<u8>: std::convert::From<P> 
+    {
+      let filename_c =
+        match CString::new(path) {
+          Ok(s) => s,
+          _ => return Err(FileError::InvalidFileName)
+        };
+      let filename_c_ptr = filename_c.as_ptr();
+
+      let f = unsafe { ll::taglib_file_new(filename_c_ptr) };
+      if f.is_null() {
+        return Err(FileError::InvalidFile);
+      }
+
+      Ok(File { raw: f })
+    }
 
   /// Creates a new `taglib::File` for the given `filename` and type of file.
   pub fn new_type(filename: &str, filetype: FileType) -> Result<File, FileError> {
