@@ -32,8 +32,7 @@ use sys as ll;
 fn c_str_to_str(c_str: *const c_char) -> String {
   if c_str.is_null() {
     String::new()
-  }
-  else {
+  } else {
     let bytes = unsafe { CStr::from_ptr(c_str).to_bytes() };
     String::from_utf8_lossy(bytes).to_string()
   }
@@ -49,9 +48,8 @@ pub struct File {
 /// Each `Tag` instance can only be created by the `taglib::File::tag()`
 /// method.
 #[allow(dead_code)]
-pub struct Tag<'a> {
-  raw: *mut ll::TagLib_Tag,
-  file: &'a File,
+pub struct Tag {
+  raw: *mut ll::TagLib_Tag
 }
 
 /// Common audio file properties.
@@ -59,12 +57,11 @@ pub struct Tag<'a> {
 /// Instances of `AudioProperties` can only be created through the
 /// `taglib::File::audioproperties()` method.
 #[allow(dead_code)]
-pub struct AudioProperties<'a> {
+pub struct AudioProperties {
   raw: *const ll::TagLib_AudioProperties,
-  file: &'a File,
 }
 
-impl<'a> Tag<'a> {
+impl Tag {
   /// Returns the track name, or an empty string if no track name is present.
   pub fn title(&self) -> String {
     let res = unsafe { ll::taglib_tag_title(self.raw) };
@@ -152,7 +149,7 @@ impl<'a> Tag<'a> {
   }
 }
 
-impl<'a> AudioProperties<'a> {
+impl AudioProperties {
   /// Returns the length, in seconds, of the track.
   pub fn length(&self) -> u32 {
     unsafe { ll::taglib_audioproperties_length(self.raw) as u32 }
@@ -227,7 +224,7 @@ impl File {
         Ok(s) => s,
         _ => return Err(FileError::InvalidFileName)
       };
-      
+
     let filename_c_ptr = filename_c.as_ptr();
 
     let f = unsafe { ll::taglib_file_new(filename_c_ptr) };
@@ -261,9 +258,8 @@ impl File {
 
     if res.is_null() {
       Err(FileError::NoAvailableTag)
-    }
-    else {
-      Ok(Tag { raw: res, file: self })
+    } else {
+      Ok(Tag { raw: res })
     }
   }
 
@@ -278,9 +274,8 @@ impl File {
 
     if res.is_null() {
       Err(FileError::NoAvailableAudioProperties)
-    }
-    else {
-      Ok(AudioProperties { raw: res, file: self })
+    } else {
+      Ok(AudioProperties { raw: res })
     }
   }
 
