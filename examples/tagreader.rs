@@ -21,13 +21,13 @@ pub fn main() {
     match file.tag() {
       Ok(t) => {
         println!("-- TAG --");
-        println!("title   - {}", t.title());
-        println!("artist  - {}", t.artist());
-        println!("album   - {}", t.album());
-        println!("year    - {}", t.year());
-        println!("comment - {}", t.comment());
-        println!("track   - {}", t.track());
-        println!("genre   - {}", t.genre());
+        println!("title   - {}", t.title().unwrap_or_default());
+        println!("artist  - {}", t.artist().unwrap_or_default());
+        println!("album   - {}", t.album().unwrap_or_default());
+        println!("year    - {}", t.year().unwrap_or_default());
+        println!("comment - {}", t.comment().unwrap_or_default());
+        println!("track   - {}", t.track().unwrap_or_default());
+        println!("genre   - {}", t.genre().unwrap_or_default());
       },
       Err(e) => {
         println!("No available tags for {} (error: {:?})", arg, e);
