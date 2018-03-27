@@ -29,13 +29,27 @@ use std::ffi::{CString, CStr};
 
 use sys as ll;
 
-fn c_str_to_str(c_str: *const c_char) -> String {
+fn c_str_to_str(c_str: *const c_char) -> Option<String> {
   if c_str.is_null() {
-    String::new()
-  } else {
-    let bytes = unsafe { CStr::from_ptr(c_str).to_bytes() };
-    String::from_utf8_lossy(bytes).to_string()
+    return None;
   }
+
+  let bytes = unsafe { CStr::from_ptr(c_str).to_bytes() };
+  if bytes.is_empty() {
+    None
+  } else {
+    Some(String::from_utf8_lossy(bytes).to_string())
+  }
+}
+
+fn u32_to_option(n: u32) -> Option<u32> {
+  if n == 0 { None } else { Some(n) }
+}
+
+fn str_to_c_str(s: Option<String>) -> *const c_char {
+    let s = s.unwrap_or("".into());
+
+    CString::new(s.as_str()).unwrap().as_ptr()
 }
 
 /// A representation of an audio file, with meta-data and properties.
@@ -43,134 +57,61 @@ pub struct File {
   raw: *mut ll::TagLib_File,
 }
 
-/// The abstract meta-data container for audio files
-///
-/// Each `Tag` instance can only be created by the `taglib::File::tag()`
-/// method.
-#[allow(dead_code)]
+/// Represents audio tag metadata.
 pub struct Tag {
-  raw: *mut ll::TagLib_Tag
-}
-
-/// Common audio file properties.
-///
-/// Instances of `AudioProperties` can only be created through the
-/// `taglib::File::audioproperties()` method.
-#[allow(dead_code)]
-pub struct AudioProperties {
-  raw: *const ll::TagLib_AudioProperties,
+  /// The title of the track, if available.
+  pub title: Option<String>,
+  /// The album name, if available.
+  pub album: Option<String>,
+  /// The artist name, if available.
+  pub artist: Option<String>,
+  /// An additional comment, if available.
+  pub comment: Option<String>,
+  /// The genre, if any.
+  pub genre: Option<String>,
+  /// The year the track was created, if available.
+  pub year: Option<u32>,
+  /// The track number, if available.
+  pub track: Option<u32>,
 }
 
 impl Tag {
-  /// Returns the track name, or an empty string if no track name is present.
-  pub fn title(&self) -> String {
-    let res = unsafe { ll::taglib_tag_title(self.raw) };
-    c_str_to_str(res)
-  }
-
-  /// Sets the track name.
-  pub fn set_title(&mut self, title: &str) {
-    let cs = CString::new(title).unwrap();
-    let s = cs.as_ptr();
-    unsafe { ll::taglib_tag_set_title(self.raw, s); }
-  }
-
-  /// Returns the artist name, or an empty string if no artist name is present.
-  pub fn artist(&self) -> String {
-    let res = unsafe { ll::taglib_tag_artist(self.raw) };
-    c_str_to_str(res)
-  }
-
-  /// Sets the artist name.
-  pub fn set_artist(&mut self, artist: &str) {
-    let cs = CString::new(artist).unwrap();
-    let s = cs.as_ptr();
-    unsafe { ll::taglib_tag_set_artist(self.raw, s); }
-  }
-
-  /// Returns the album name, or an empty string if no album name is present.
-  pub fn album(&self) -> String {
-    let res = unsafe { ll::taglib_tag_album(self.raw) };
-    c_str_to_str(res)
-  }
-
-  /// Sets the album name.
-  pub fn set_album(&mut self, album: &str) {
-    let cs = CString::new(album).unwrap();
-    let s = cs.as_ptr();
-    unsafe { ll::taglib_tag_set_album(self.raw, s); }
-  }
-
-  /// Returns the track comment, or an empty string if no track comment is
-  /// present.
-  pub fn comment(&self) -> String {
-    let res = unsafe { ll::taglib_tag_comment(self.raw) };
-    c_str_to_str(res)
-  }
-
-  /// Sets the track comment.
-  pub fn set_comment(&mut self, comment: &str) {
-    let cs = CString::new(comment).unwrap();
-    let s = cs.as_ptr();
-    unsafe { ll::taglib_tag_set_comment(self.raw, s); }
-  }
-
-  /// Returns the genre name, or an empty string if no genre name is present.
-  pub fn genre(&self) -> String {
-    let res = unsafe { ll::taglib_tag_genre(self.raw) };
-    c_str_to_str(res)
-  }
-
-  /// Sets the genre name.
-  pub fn set_genre(&mut self, genre: &str) {
-    let cs = CString::new(genre).unwrap();
-    let s = cs.as_ptr();
-    unsafe { ll::taglib_tag_set_genre(self.raw, s); }
-  }
-
-  /// Returns the year, or 0 if no year is present.
-  pub fn year(&self) -> u32 {
-    unsafe { ll::taglib_tag_year(self.raw) as u32 }
-  }
-
-  /// Sets the year.
-  pub fn set_year(&mut self, year: u32) {
-    unsafe { ll::taglib_tag_set_year(self.raw, year); }
-  }
-
-  /// Returns the track number, or 0 if no track number is present.
-  pub fn track(&self) -> u32 {
-    unsafe { ll::taglib_tag_track(self.raw) as u32 }
-  }
-
-  /// Sets the track number.
-  pub fn set_track(&mut self, track: u32) {
-    unsafe { ll::taglib_tag_set_track(self.raw, track); }
+  unsafe fn new(raw: *const ll::TagLib_Tag) -> Tag {
+    Tag {
+      title: c_str_to_str(ll::taglib_tag_title(raw)),
+      album: c_str_to_str(ll::taglib_tag_album(raw)),
+      artist: c_str_to_str(ll::taglib_tag_artist(raw)),
+      comment: c_str_to_str(ll::taglib_tag_comment(raw)),
+      genre: c_str_to_str(ll::taglib_tag_genre(raw)),
+      year: u32_to_option(ll::taglib_tag_year(raw) as u32),
+      track: u32_to_option(ll::taglib_tag_track(raw) as u32)
+    }
   }
 }
 
+/// Common audio file properties.
+pub struct AudioProperties {
+  /// The length, in seconds, of the track.
+  pub length: u32,
+  /// The most appropriate bit rate for the track, in KB/s.
+  /// For constant bit rate formats, the value is the bit rate of the file;
+  /// for variable bit rate formats this is either the average or the nominal
+  /// bit rate.
+  pub bitrate: u32,
+  /// The sample rate in Hz.
+  pub samplerate: u32,
+  /// The number of audio channels.
+  pub channels: u32,
+}
+
 impl AudioProperties {
-  /// Returns the length, in seconds, of the track.
-  pub fn length(&self) -> u32 {
-    unsafe { ll::taglib_audioproperties_length(self.raw) as u32 }
-  }
-
-  /// Returns the most appropriate bit rate for the track, in kB/s.
-  /// For constant bit rate formats, the returned value is the bit
-  /// rate of the file; for variable bit rate formats this is either
-  /// the average or the nominal bit rate.
-  pub fn bitrate(&self) -> u32 {
-    unsafe { ll::taglib_audioproperties_bitrate(self.raw) as u32 }
-  }
-
-  /// Returns the sample rate, in Hz.
-  pub fn samplerate(&self) -> u32 {
-    unsafe { ll::taglib_audioproperties_samplerate(self.raw) as u32 }
-  }
-
-  /// Returns the number of audio channels.
-  pub fn channels(&self) -> u32 {
-    unsafe { ll::taglib_audioproperties_channels(self.raw) as u32 }
+  unsafe fn new(raw: *const ll::TagLib_AudioProperties) -> AudioProperties {
+    AudioProperties {
+      length: ll::taglib_audioproperties_length(raw) as u32,
+      bitrate: ll::taglib_audioproperties_bitrate(raw) as u32,
+      samplerate: ll::taglib_audioproperties_samplerate(raw) as u32,
+      channels: ll::taglib_audioproperties_channels(raw) as u32,
+    }
   }
 }
 
@@ -252,35 +193,50 @@ impl File {
     Ok(File { raw: f })
   }
 
-  /// Returns the `taglib::Tag` instance for the given file.
-  pub fn tag(&self) -> Result<Tag, FileError> {
-    let res = unsafe { ll::taglib_file_tag(self.raw) };
-
-    if res.is_null() {
-      Err(FileError::NoAvailableTag)
-    } else {
-      Ok(Tag { raw: res })
-    }
-  }
-
   /// Returns whether the file is valid.
   pub fn is_valid(&self) -> bool {
     unsafe { ll::taglib_file_is_valid(self.raw) != 0 }
   }
 
-  /// Returns the `taglib::AudioProperties` instance for the given file.
-  pub fn audioproperties(&self) -> Result<AudioProperties, FileError> {
-    let res = unsafe { ll::taglib_file_audioproperties(self.raw) };
+  /// Returns the `taglib::Tag` instance for the given file.
+  pub fn tag(&self) -> Result<Tag, FileError> {
+    let raw = unsafe { ll::taglib_file_tag(self.raw) };
 
-    if res.is_null() {
-      Err(FileError::NoAvailableAudioProperties)
+    if raw.is_null() {
+      Err(FileError::NoAvailableTag)
     } else {
-      Ok(AudioProperties { raw: res })
+      let tag = unsafe { Tag::new(raw) };
+      Ok(tag)
     }
   }
 
-  /// Updates the meta-data of the file.
-  pub fn save(&self) -> bool {
-    unsafe { ll::taglib_file_save(self.raw) != 0 }
+
+  /// Returns the `taglib::AudioProperties` instance for the given file.
+  pub fn audioproperties(&self) -> Result<AudioProperties, FileError> {
+    let raw = unsafe { ll::taglib_file_audioproperties(self.raw) };
+
+    if raw.is_null() {
+      Err(FileError::NoAvailableAudioProperties)
+    } else {
+      let props = unsafe { AudioProperties::new(raw) };
+      Ok(props)
+    }
+  }
+
+  /// Write the given tag to the audio file.
+  pub fn save(&self, tag: Tag) -> bool {
+      unsafe {
+        let raw_tag = ll::taglib_file_tag(self.raw);
+        // if the user managed to get a tag to pass in then this should work
+        assert!(!raw_tag.is_null());
+        ll::taglib_tag_set_title(raw_tag, str_to_c_str(tag.title));
+        ll::taglib_tag_set_album(raw_tag, str_to_c_str(tag.album));
+        ll::taglib_tag_set_artist(raw_tag, str_to_c_str(tag.artist));
+        ll::taglib_tag_set_genre(raw_tag, str_to_c_str(tag.genre));
+        ll::taglib_tag_set_comment(raw_tag, str_to_c_str(tag.comment));
+        ll::taglib_tag_set_year(raw_tag, tag.year.unwrap_or(0));
+        ll::taglib_tag_set_track(raw_tag, tag.track.unwrap_or(0));
+        ll::taglib_file_save(self.raw) != 0
+      }
   }
 }
