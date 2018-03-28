@@ -21,13 +21,13 @@ pub fn main() {
     match file.tag() {
       Ok(t) => {
         println!("-- TAG --");
-        println!("title   - {}", t.title());
-        println!("artist  - {}", t.artist());
-        println!("album   - {}", t.album());
-        println!("year    - {}", t.year());
-        println!("comment - {}", t.comment());
-        println!("track   - {}", t.track());
-        println!("genre   - {}", t.genre());
+        println!("title   - {}", t.title.unwrap_or_default());
+        println!("artist  - {}", t.artist.unwrap_or_default());
+        println!("album   - {}", t.album.unwrap_or_default());
+        println!("comment - {}", t.comment.unwrap_or_default());
+        println!("genre   - {}", t.genre.unwrap_or_default());
+        println!("year    - {}", t.year.unwrap_or(0));
+        println!("track   - {}", t.track.unwrap_or(0));
       },
       Err(e) => {
         println!("No available tags for {} (error: {:?})", arg, e);
@@ -36,13 +36,13 @@ pub fn main() {
 
     match file.audioproperties() {
       Ok(p) => {
-        let secs = p.length() % 60;
-        let mins = (p.length() - secs) / 60;
+        let secs = p.length % 60;
+        let mins = (p.length - secs) / 60;
 
         println!("-- AUDIO --");
-        println!("bitrate     - {}", p.bitrate());
-        println!("sample rate - {}", p.samplerate());
-        println!("channels    - {}", p.channels());
+        println!("bitrate     - {}", p.bitrate);
+        println!("sample rate - {}", p.samplerate);
+        println!("channels    - {}", p.channels);
         println!("length      - {}m:{}s", mins, secs);
       },
       Err(e) => {

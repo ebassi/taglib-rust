@@ -14,7 +14,7 @@ name = "taglib"
 path = "src/lib.rs"
 
 [dependencies]
-libc = "0.1"
+libc = "0.2"
 
 [dependencies.taglib-sys]
 path = "taglib-sys"
