@@ -326,6 +326,20 @@ mod test {
     }
 
     #[test]
+    fn test_get_tag_explicit() {
+        let file = File::new_type(TEST_MP3, FileType::MPEG).unwrap();
+        let tag = file.tag().unwrap();
+        assert_eq!(tag.artist(), "Artist");
+    }
+
+    #[test]
+    fn test_get_audioproperties() {
+        let file = File::new(TEST_MP3).unwrap();
+        let ap = file.audioproperties().unwrap();
+        assert_eq!(ap.length(), 0);
+    }
+
+    #[test]
     fn test_set_tag() {
         let temp_fn = "fixtures/temp.mp3";
         fs::copy(TEST_MP3, temp_fn).unwrap();
