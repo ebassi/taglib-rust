@@ -44,32 +44,35 @@ pub const TAGLIB_FILE_ASF: TagLib_FileType = 9;
 
 // tag_c.h
 extern "C" {
-  pub fn taglib_file_new(filename: *const c_char) -> *mut TagLib_File;
-  pub fn taglib_file_new_type(filename: *const c_char, filetype: TagLib_FileType) -> *mut TagLib_File;
-  pub fn taglib_file_is_valid(file: *mut TagLib_File) -> TagLib_Bool;
-  pub fn taglib_file_free(file: *mut TagLib_File);
-  pub fn taglib_file_save(file: *mut TagLib_File) -> TagLib_Bool;
-  pub fn taglib_file_tag(file: *mut TagLib_File) -> *mut TagLib_Tag;
-  pub fn taglib_file_audioproperties(file: *mut TagLib_File) -> *const TagLib_AudioProperties;
+    pub fn taglib_file_new(filename: *const c_char) -> *mut TagLib_File;
+    pub fn taglib_file_new_type(
+        filename: *const c_char,
+        filetype: TagLib_FileType,
+    ) -> *mut TagLib_File;
+    pub fn taglib_file_is_valid(file: *mut TagLib_File) -> TagLib_Bool;
+    pub fn taglib_file_free(file: *mut TagLib_File);
+    pub fn taglib_file_save(file: *mut TagLib_File) -> TagLib_Bool;
+    pub fn taglib_file_tag(file: *mut TagLib_File) -> *mut TagLib_Tag;
+    pub fn taglib_file_audioproperties(file: *mut TagLib_File) -> *const TagLib_AudioProperties;
 
-  pub fn taglib_tag_title(tag: *const TagLib_Tag) -> *const c_char;
-  pub fn taglib_tag_artist(tag: *const TagLib_Tag) -> *const c_char;
-  pub fn taglib_tag_album(tag: *const TagLib_Tag) -> *const c_char;
-  pub fn taglib_tag_comment(tag: *const TagLib_Tag) -> *const c_char;
-  pub fn taglib_tag_genre(tag: *const TagLib_Tag) -> *const c_char;
-  pub fn taglib_tag_year(tag: *const TagLib_Tag) -> c_uint;
-  pub fn taglib_tag_track(tag: *const TagLib_Tag) -> c_uint;
-  pub fn taglib_tag_set_title(tag: *mut TagLib_Tag, title: *const c_char);
-  pub fn taglib_tag_set_artist(tag: *mut TagLib_Tag, artist: *const c_char);
-  pub fn taglib_tag_set_album(tag: *mut TagLib_Tag, album: *const c_char);
-  pub fn taglib_tag_set_comment(tag: *mut TagLib_Tag, comment: *const c_char);
-  pub fn taglib_tag_set_genre(tag: *mut TagLib_Tag, genre: *const c_char);
-  pub fn taglib_tag_set_year(tag: *mut TagLib_Tag, year: c_uint);
-  pub fn taglib_tag_set_track(tag: *mut TagLib_Tag, track: c_uint);
-  pub fn taglib_tag_free_strings();
+    pub fn taglib_tag_title(tag: *const TagLib_Tag) -> *const c_char;
+    pub fn taglib_tag_artist(tag: *const TagLib_Tag) -> *const c_char;
+    pub fn taglib_tag_album(tag: *const TagLib_Tag) -> *const c_char;
+    pub fn taglib_tag_comment(tag: *const TagLib_Tag) -> *const c_char;
+    pub fn taglib_tag_genre(tag: *const TagLib_Tag) -> *const c_char;
+    pub fn taglib_tag_year(tag: *const TagLib_Tag) -> c_uint;
+    pub fn taglib_tag_track(tag: *const TagLib_Tag) -> c_uint;
+    pub fn taglib_tag_set_title(tag: *mut TagLib_Tag, title: *const c_char);
+    pub fn taglib_tag_set_artist(tag: *mut TagLib_Tag, artist: *const c_char);
+    pub fn taglib_tag_set_album(tag: *mut TagLib_Tag, album: *const c_char);
+    pub fn taglib_tag_set_comment(tag: *mut TagLib_Tag, comment: *const c_char);
+    pub fn taglib_tag_set_genre(tag: *mut TagLib_Tag, genre: *const c_char);
+    pub fn taglib_tag_set_year(tag: *mut TagLib_Tag, year: c_uint);
+    pub fn taglib_tag_set_track(tag: *mut TagLib_Tag, track: c_uint);
+    pub fn taglib_tag_free_strings();
 
-  pub fn taglib_audioproperties_length(properties: *const TagLib_AudioProperties) -> c_int;
-  pub fn taglib_audioproperties_bitrate(properties: *const TagLib_AudioProperties) -> c_int;
-  pub fn taglib_audioproperties_samplerate(properties: *const TagLib_AudioProperties) -> c_int;
-  pub fn taglib_audioproperties_channels(properties: *const TagLib_AudioProperties) -> c_int;
+    pub fn taglib_audioproperties_length(properties: *const TagLib_AudioProperties) -> c_int;
+    pub fn taglib_audioproperties_bitrate(properties: *const TagLib_AudioProperties) -> c_int;
+    pub fn taglib_audioproperties_samplerate(properties: *const TagLib_AudioProperties) -> c_int;
+    pub fn taglib_audioproperties_channels(properties: *const TagLib_AudioProperties) -> c_int;
 }
