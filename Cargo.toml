@@ -2,7 +2,7 @@
 name = "taglib"
 description = "Rust bindings for TagLib"
 version = "0.2.0"
-authors = ["Emmanuele Bassi <ebassi@gnome.org>"]
+authors = ["Emmanuele Bassi <ebassi@gnome.org>", "Chris Down <chris@chrisdown.name>"]
 license = "MIT"
 repository = "https://github.com/ebassi/taglib-rust/"
 keywords = ["taglib", "media", "tags", "metadata"]
