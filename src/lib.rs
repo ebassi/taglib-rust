@@ -306,3 +306,37 @@ impl File {
         unsafe { ll::taglib_file_save(self.raw) != 0 }
     }
 }
+
+
+/// Fixture creation:
+/// ffmpeg -t 0.01 -f s16le -i /dev/zero test.mp3
+/// kid3-cli -c 'set artist "Artist"' test.mp3
+#[cfg(test)]
+mod test {
+    const TEST_MP3: &'static str = "fixtures/test.mp3";
+
+    use super::*;
+    use std::fs;
+
+    #[test]
+    fn test_get_tag() {
+        let file = File::new(TEST_MP3).unwrap();
+        let tag = file.tag().unwrap();
+        assert_eq!(tag.artist(), "Artist");
+    }
+
+    #[test]
+    fn test_set_tag() {
+        let temp_fn = "fixtures/temp.mp3";
+        fs::copy(TEST_MP3, temp_fn).unwrap();
+        let file = File::new(temp_fn).unwrap();
+        let mut tag = file.tag().unwrap();
+
+        tag.set_artist("Not Artist");
+        file.save();
+
+        assert_eq!(tag.artist(), "Not Artist");
+
+        fs::remove_file(temp_fn).unwrap();
+    }
+}
