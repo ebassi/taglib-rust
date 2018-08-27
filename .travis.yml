@@ -5,7 +5,8 @@ rust:
     - beta
     - nightly
 
-install:
+before_install:
+    - sudo apt-get update -qq
     - sudo apt-get install libtagc0-dev
 
 cache: cargo
