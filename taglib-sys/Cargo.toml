@@ -13,7 +13,7 @@ name = "taglib_sys"
 path = "src/lib.rs"
 
 [dependencies]
-libc = "0.1"
+libc = "0.2"
 
 [build-dependencies.pkg-config]
 version = "0.3"
