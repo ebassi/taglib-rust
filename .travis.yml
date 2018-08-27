@@ -6,7 +6,7 @@ rust:
     - nightly
 
 install:
-    - sudo apt-get install libtag1-dev libtagc0-dev
+    - sudo apt-get install libtagc0-dev
 
 cache: cargo
 
