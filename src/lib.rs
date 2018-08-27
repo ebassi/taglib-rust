@@ -362,10 +362,13 @@ mod test {
         fs::copy(TEST_MP3, temp_fn).unwrap();
         let file = File::new(temp_fn).unwrap();
         let mut tag = file.tag().unwrap();
-
         tag.set_artist("Not Artist");
+        assert_eq!(tag.artist().unwrap(), "Not Artist");
+
         file.save();
 
+        let file = File::new(temp_fn).unwrap();
+        let tag = file.tag().unwrap();
         assert_eq!(tag.artist().unwrap(), "Not Artist");
 
         fs::remove_file(temp_fn).unwrap();
