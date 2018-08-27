@@ -26,6 +26,7 @@ extern crate taglib_sys as sys;
 
 use libc::c_char;
 use std::ffi::{CString, CStr};
+use std::path::Path;
 
 use sys as ll;
 
@@ -236,12 +237,9 @@ impl Drop for File {
 
 impl File {
     /// Creates a new `taglib::File` for the given `filename`.
-    pub fn new(filename: &str) -> Result<File, FileError> {
-        let filename_c = match CString::new(filename) {
-            Ok(s) => s,
-            _ => return Err(FileError::InvalidFileName),
-        };
-
+    pub fn new<P: AsRef<Path>>(path: P) -> Result<File, FileError> {
+        let filename = path.as_ref().to_str().ok_or(FileError::InvalidFileName)?;
+        let filename_c = CString::new(filename).ok().ok_or(FileError::InvalidFileName)?;
         let filename_c_ptr = filename_c.as_ptr();
 
         let f = unsafe { ll::taglib_file_new(filename_c_ptr) };
@@ -317,6 +315,7 @@ mod test {
 
     use super::*;
     use std::fs;
+    use std::path::PathBuf;
 
     #[test]
     fn test_get_tag() {
@@ -326,7 +325,14 @@ mod test {
     }
 
     #[test]
-    fn test_get_tag_explicit() {
+    fn test_get_pathbuf() {
+        let file = File::new(PathBuf::from(TEST_MP3)).unwrap();
+        let tag = file.tag().unwrap();
+        assert_eq!(tag.artist(), "Artist");
+    }
+
+    #[test]
+    fn test_get_tag_new_type() {
         let file = File::new_type(TEST_MP3, FileType::MPEG).unwrap();
         let tag = file.tag().unwrap();
         assert_eq!(tag.artist(), "Artist");
