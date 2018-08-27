@@ -8,6 +8,8 @@ rust:
 install:
     - sudo apt-get install libtag1-dev libtagc0-dev
 
+cache: cargo
+
 script:
     - cargo build -v
     - cargo build -v --features "use-pkgconfig"
