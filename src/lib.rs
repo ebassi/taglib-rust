@@ -336,6 +336,13 @@ mod test {
     }
 
     #[test]
+    fn test_get_no_tag() {
+        let file = File::new(TEST_MP3).unwrap();
+        let tag = file.tag().unwrap();
+        assert_eq!(tag.album(), None);
+    }
+
+    #[test]
     fn test_get_tag_new_type() {
         let file = File::new_type(TEST_MP3, FileType::MPEG).unwrap();
         let tag = file.tag().unwrap();
