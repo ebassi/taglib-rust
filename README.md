@@ -1,9 +1,5 @@
 ## TagLib-Rust  [![Build Status][trav-ci-img]][trav-ci]
 
-Simple bindings for TagLib in Rust
-
-## Overview
-
 TagLib-Rust is a library that allows accessing audio meta-data in Rust, by
 using the TagLib library.
 
@@ -21,14 +17,15 @@ audio formats. Currently there is support for:
 
 ### Requirements
 
-TagLib-Rust requires:
+You need [TagLib](http://taglib.org/) installed on your system to build. This can be found in the following packages:
 
- * Rust 1.0
- * TagLib
- * the libc Rust module
+- Arch Linux: [taglib](https://www.archlinux.org/packages/extra/x86_64/taglib/)
+- CentOS/Fedora: taglib
+- Gentoo: [media-libs/taglib](https://packages.gentoo.org/packages/media-libs/taglib)
+- Ubuntu/Debian: [libtagc0-dev](https://packages.debian.org/search?searchon=names&keywords=libtagc0-dev)
 
-It also optionally depends on the `pkg-config` Rust module to find the
-location of the TagLib library when building.
+The `pkg-config` Rust module can also be optionally used to find the location
+of the TagLib library when building.
 
 ### Using TagLib-Rust
 
@@ -36,21 +33,21 @@ If you're using [cargo][crates] to manage your project, you can download
 through Crates.io:
 
 ```toml
-    [dependencies]
-    taglib = "0.1.0"
+[dependencies]
+taglib = "*"
 ```
 
 Alternatively, you can pull it from [GitHub][taglib-gh]:
 
 ```rust
-    [dependencies.taglib]
-    git = "https://github.com/ebassi/taglib-rust"
+[dependencies]
+taglib = { git = "https://github.com/ebassi/taglib-rust" }
 ```
 
 Otherwise, clone [the Git repository][taglib-gh], and run [cargo][crates]:
 
 ```
-    $ cargo build
+$ cargo build
 ```
 
 ### Examples
