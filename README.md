@@ -70,5 +70,5 @@ See the `LICENSE` file for more details.
 [trav-ci]: https://travis-ci.org/ebassi/taglib-rust
 [crates]: http://crates.io/
 [taglib-gh]: https://github.com/ebassi/taglib-rust
-[taglib-docs]: http://ebassi.github.io/taglib-rust/docs/taglib/
+[taglib-docs]: https://docs.rs/taglib/
 [osi-mit]: http://opensource.org/licenses/MIT
