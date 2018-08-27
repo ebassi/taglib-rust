@@ -30,13 +30,18 @@ use std::path::Path;
 
 use sys as ll;
 
-fn c_str_to_str(c_str: *const c_char) -> String {
+fn c_str_to_str(c_str: *const c_char) -> Option<String> {
     if c_str.is_null() {
-        String::new()
+        None
     } else {
         let bytes = unsafe { CStr::from_ptr(c_str).to_bytes() };
-        String::from_utf8_lossy(bytes).to_string()
+
+        if bytes.is_empty() { None } else { Some(String::from_utf8_lossy(bytes).to_string()) }
     }
+}
+
+fn u32_to_option(n: u32) -> Option<u32> {
+    if n == 0 { None } else { Some(n) }
 }
 
 /// A representation of an audio file, with meta-data and properties.
@@ -65,8 +70,8 @@ pub struct AudioProperties<'a> {
 }
 
 impl<'a> Tag<'a> {
-    /// Returns the track name, or an empty string if no track name is present.
-    pub fn title(&self) -> String {
+    /// Returns the track name, if any.
+    pub fn title(&self) -> Option<String> {
         let res = unsafe { ll::taglib_tag_title(self.raw) };
         c_str_to_str(res)
     }
@@ -80,8 +85,8 @@ impl<'a> Tag<'a> {
         }
     }
 
-    /// Returns the artist name, or an empty string if no artist name is present.
-    pub fn artist(&self) -> String {
+    /// Returns the artist name, if any.
+    pub fn artist(&self) -> Option<String> {
         let res = unsafe { ll::taglib_tag_artist(self.raw) };
         c_str_to_str(res)
     }
@@ -95,8 +100,8 @@ impl<'a> Tag<'a> {
         }
     }
 
-    /// Returns the album name, or an empty string if no album name is present.
-    pub fn album(&self) -> String {
+    /// Returns the album name, if any.
+    pub fn album(&self) -> Option<String> {
         let res = unsafe { ll::taglib_tag_album(self.raw) };
         c_str_to_str(res)
     }
@@ -110,9 +115,8 @@ impl<'a> Tag<'a> {
         }
     }
 
-    /// Returns the track comment, or an empty string if no track comment is
-    /// present.
-    pub fn comment(&self) -> String {
+    /// Returns the track comment, if any.
+    pub fn comment(&self) -> Option<String> {
         let res = unsafe { ll::taglib_tag_comment(self.raw) };
         c_str_to_str(res)
     }
@@ -126,8 +130,8 @@ impl<'a> Tag<'a> {
         }
     }
 
-    /// Returns the genre name, or an empty string if no genre name is present.
-    pub fn genre(&self) -> String {
+    /// Returns the genre name, if any.
+    pub fn genre(&self) -> Option<String> {
         let res = unsafe { ll::taglib_tag_genre(self.raw) };
         c_str_to_str(res)
     }
@@ -141,9 +145,9 @@ impl<'a> Tag<'a> {
         }
     }
 
-    /// Returns the year, or 0 if no year is present.
-    pub fn year(&self) -> u32 {
-        unsafe { ll::taglib_tag_year(self.raw) as u32 }
+    /// Returns the year, if any.
+    pub fn year(&self) -> Option<u32> {
+        u32_to_option(unsafe { ll::taglib_tag_year(self.raw) as u32 })
     }
 
     /// Sets the year.
@@ -153,9 +157,9 @@ impl<'a> Tag<'a> {
         }
     }
 
-    /// Returns the track number, or 0 if no track number is present.
-    pub fn track(&self) -> u32 {
-        unsafe { ll::taglib_tag_track(self.raw) as u32 }
+    /// Returns the track number, if any.
+    pub fn track(&self) -> Option<u32> {
+        u32_to_option(unsafe { ll::taglib_tag_track(self.raw) as u32 })
     }
 
     /// Sets the track number.
@@ -321,21 +325,21 @@ mod test {
     fn test_get_tag() {
         let file = File::new(TEST_MP3).unwrap();
         let tag = file.tag().unwrap();
-        assert_eq!(tag.artist(), "Artist");
+        assert_eq!(tag.artist().unwrap(), "Artist");
     }
 
     #[test]
     fn test_get_pathbuf() {
         let file = File::new(PathBuf::from(TEST_MP3)).unwrap();
         let tag = file.tag().unwrap();
-        assert_eq!(tag.artist(), "Artist");
+        assert_eq!(tag.artist().unwrap(), "Artist");
     }
 
     #[test]
     fn test_get_tag_new_type() {
         let file = File::new_type(TEST_MP3, FileType::MPEG).unwrap();
         let tag = file.tag().unwrap();
-        assert_eq!(tag.artist(), "Artist");
+        assert_eq!(tag.artist().unwrap(), "Artist");
     }
 
     #[test]
@@ -355,7 +359,7 @@ mod test {
         tag.set_artist("Not Artist");
         file.save();
 
-        assert_eq!(tag.artist(), "Not Artist");
+        assert_eq!(tag.artist().unwrap(), "Not Artist");
 
         fs::remove_file(temp_fn).unwrap();
     }
