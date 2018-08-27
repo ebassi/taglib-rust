@@ -2,6 +2,8 @@ language: rust
 
 rust:
     - stable
+    - beta
+    - nightly
 
 install:
     - sudo apt-get install libtag1-dev libtagc0-dev
