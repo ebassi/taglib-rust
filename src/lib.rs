@@ -234,6 +234,7 @@ pub enum FileError {
 impl Drop for File {
     fn drop(&mut self) {
         unsafe {
+            ll::taglib_tag_free_strings();
             ll::taglib_file_free(self.raw);
         }
     }
